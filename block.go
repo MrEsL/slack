@@ -861,6 +861,12 @@ func (s Section) AddAccessory(accessory Element) Section {
 	return s
 }
 
+// SetBlockId sets the block id for the section.
+func (s Section) SetBlockId(blockId string) Section {
+	s.setBlockId(blockId)
+	return s
+}
+
 // setBlockId sets the block id for the section.
 func (s *Section) setBlockId(blockId string) {
 	s.blockId = blockId
