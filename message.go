@@ -11,9 +11,10 @@ const (
 )
 
 type Message struct {
-	Blocks []Block
-	Footer string
-	Msg    string
+	Blocks                []Block
+	Footer                string
+	Msg                   string
+	TemplateWithoutBlocks bool
 }
 
 // NewMessage Create a new message
@@ -22,6 +23,9 @@ func NewMessage() Message {
 }
 
 func (m Message) Template() string {
+	if m.TemplateWithoutBlocks {
+		return `[{{ range $index, $element := .Blocks}}{{if $index}},{{end}}{{$element.Render}}{{end}}]`
+	}
 	return `{
 	"blocks": [{{ range $index, $element := .Blocks}}{{if $index}},{{end}}{{$element.Render}}{{end}}]
 	}`
